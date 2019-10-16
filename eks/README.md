@@ -38,5 +38,24 @@ Access the AWS Cloud9 Environment created by CloudFormation:
      
    This script will install kubectl, eksctl and helm that we will need to deploy your applications in EKS
     
+### Discover your EKS Cluster and install Helm
 
+Use the eksctl to find your EKS cluster that was preprivisioned for you, run the followingh command
+
+      eksctl get clusters
+      
+To learn more about eksctl, have a look at https://eksctl.io/ to learn the syntax
+Now that you can see a cluster pre-provisioned for you, run the folloiowng commans to enable Helm
+
+Setup a K8s service account for Helm (kubernetes package manager)
+
+      kubectl apply -f https://raw.githubusercontent.com/anz-containers/aws-appmesh-helm/master/scripts/helm-rbac.yaml
+      
+Install Helm into the K8s cluster
+
+      helm init --service-account=tiller
+      
+ Validate that the cluster deployed properly by listing the nodes
+ 
+       kubectl get nodes
     
