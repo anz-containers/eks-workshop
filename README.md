@@ -18,3 +18,5 @@ This SDK/library approach has two major flaws:
 This is where service meshes come in. They work differently.
 
 Most services meshes today (like AWS App Mesh (https://aws.amazon.com/app-mesh/), Linkerd (https://linkerd.io/2/overview/), and Istio (https://istio.io/)) work instead by running a small proxy as a sidecar (https://medium.com/@dwdraju/sidecar-pattern-with-use-case-examples-ed6642e5eaf7). This is a generic term for a small application, deployed alongside the main application.
+
+![AWS App Mesh](/images/AppMesh.png)
