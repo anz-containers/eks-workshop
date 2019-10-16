@@ -20,3 +20,14 @@ This is where service meshes come in. They work differently.
 Most services meshes today (like AWS App Mesh (https://aws.amazon.com/app-mesh/), Linkerd (https://linkerd.io/2/overview/), and Istio (https://istio.io/)) work instead by running a small proxy as a sidecar (https://medium.com/@dwdraju/sidecar-pattern-with-use-case-examples-ed6642e5eaf7). This is a generic term for a small application, deployed alongside the main application.
 
 ![AWS App Mesh](/images/AppMesh.png)
+
+With service meshes, the sidecar proxy captures all inbound and outbound traffic to/from the application. These sidecar proxies nearly always operate at Layer 7 (https://en.wikipedia.org/wiki/OSI_model), so they are protocol aware. This means that they can get visibility into the HTTP protocol, and also make routing decisions based on the protocol too. For example, if my user has a HTTP cookie set called *BETA USER*, then redirect them to my beta service.
+
+Service meshes are made up of two main architectural components:
+
+* *The control plane:* responsible for pushing out proxy configurations to each of the sidecars in a mesh. These configurations teach each proxy how to find all of the other services, which services are allowed to talk to each other, and the routing rules they need to apply (such as “send 5% of requests to xyz, if condition abc is met”).
+    
+* *The data plane: *the sidecar proxies. Often these are automatically deployed (commonly known as injected) on behalf of the user,  whenever an application container starts up.
+
+This architecture has a few benefits. Firstly, it means that *application traffic is not routed through the control plane.* Every proxy knows how to get to every other proxy/service. This helps with latency, prevents the control plane from being a potential failure point for the applications (data plane), and it also follows distributed systems best practices of isolating control plane and data plane (like most AWS services do). 
+
