@@ -1,4 +1,4 @@
-# The AWS App Mesh Value Proposition
+# AWS App Mesh Value Proposition
 
 Back when the world was deploying monolithic three-tier architectures - observability was fairly simple, and routing/discovery to an extent too. Your application was probably written in a single language, and deployed to via a single technology platform (EC2 etc). 
 
