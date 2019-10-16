@@ -31,3 +31,9 @@ Service meshes are made up of two main architectural components:
 
 This architecture has a few benefits. Firstly, it means that *application traffic is not routed through the control plane.* Every proxy knows how to get to every other proxy/service. This helps with latency, prevents the control plane from being a potential failure point for the applications (data plane), and it also follows distributed systems best practices of isolating control plane and data plane (like most AWS services do). 
 
+
+### EKS Lab
+
+
+* [Configure your Cloud9 Environment for EKS](eks/)
+
