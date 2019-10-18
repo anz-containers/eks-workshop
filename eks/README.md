@@ -14,9 +14,9 @@ Access the AWS Cloud9 Environment created by CloudFormation:
     
       cd ~    
     
-   Once you are in your home directory, build the following shell script
+   Once you are in your home directory, run the following commans
    
-      cat <<EOF >> install.sh
+      
       cd ~
       sudo yum groupinstall 'Development Tools' -y
       ruby -e "`curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install`" 
@@ -26,15 +26,19 @@ Access the AWS Cloud9 Environment created by CloudFormation:
       source  ~/.bashrc
       brew tap weaveworks/tap
       brew install kubernetes-cli kubernetes-helm weaveworks/tap/eksctl
-      EOF
+      curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/darwin/amd64/kubectl
+      chmod +x ./kubectl
+      mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+      echo 'export PATH=$HOME/bin:$PATH' >> ~/.bash_profile
+      kubectl version --short --client
       
-   Change the file to an executable
+      
    
-      chmod +x install.sh
+  update kubeconfig and apply worker noide policy
    
-   Run the script
-   
-     ./install.sh
+     
+     aws eks update-kubeconfig --name eks-workshop
+     kubectl apply -f https://eks-config-louay.s3.amazonaws.com/rbac_worker_nodes.yaml 
      
    This script will install kubectl, eksctl and helm that we will need to deploy your applications in EKS
     
