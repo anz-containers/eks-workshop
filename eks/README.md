@@ -14,7 +14,7 @@ Access the AWS Cloud9 Environment created by CloudFormation:
     
       cd ~    
     
-   Once you are in your home directory, run the following commans
+   Once you are in your home directory, run the following commands
    
       
       cd ~
